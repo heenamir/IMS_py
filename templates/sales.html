@@ -1,9 +1,13 @@
 <html>
   <head>
     <title>Demand Forecasting</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='sale.css') }}"
+    />
   </head>
   <body>
     <h1>Demand Forecasting</h1>
-    <p>Predicted Sales: { sales }</p>
+    <p>Predicted Sales: {{ sales }}</p>
   </body>
 </html>

@@ -3,18 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <title>Demand Forecasting</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
   </head>
   <body>
     <h1>Demand Forecasting</h1>
     <form method="POST" action="/predict">
       <label for="customers">Customers: </label>
       <input type="text" id="customers" name="customers" /><br />
-      <label for="promo">Promo: </label><br />
+      <label for="promo">Promo: </label>
       <input type="checkbox" id="yesp" name="yesp" />
       <label for="yesp">Yes</label><br />
-      <label for="holiday">Holiday: </label><br />
+      <label for="holiday">Holiday: </label>
       <input type="checkbox" id="yesh" name="yesh" />
-      <label for="yesh">Yes</label><br />
+      <label for="yesh">Yes</label>
       <input type="submit" value="Predict" />
     </form>
   </body>
