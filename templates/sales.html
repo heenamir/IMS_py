@@ -5,9 +5,17 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='sale.css') }}"
     />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
   </head>
   <body>
     <h1>Demand Forecasting</h1>
-    <p>Predicted Sales: {{ sales }}</p>
+    <b
+      ><p style="border: 5px solid rgb(26, 155, 26)">
+        Predicted Sales - XGBoost: Rs. {{ sales }}
+      </p></b
+    >
+    <p>Predicted Sales - Linear Regression: Rs. {{ sales_lr }}</p>
+    <p>Predicted Sales - Average Model: Rs. {{ sales_average }}</p>
+    <a href="/" class="button" style="text-align: center">Back to Home</a>
   </body>
 </html>

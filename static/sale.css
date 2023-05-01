@@ -27,4 +27,37 @@ body {
     font-size: 18px;
     margin-left: auto;
     margin-right: auto;
+    /* border: 2px solid rgb(26, 155, 26); */
+    animation: move-border 5s ease-in-out infinite;
+  }
+
+  @keyframes move-border {
+    0% {
+      border-color: green;
+    }
+    25% {
+      border-color: yellow;
+    }
+    50% {
+      border-color: red;
+    }
+    75% {
+      border-color: palevioletred;
+    }
+    100% {
+      border-color: green;
+    }
+  }
+
+  .button {
+    display: block;
+    margin: auto;
+    padding: 20px;
+    margin-left: 40%;
+    margin-right: 40%;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 150px;
   }

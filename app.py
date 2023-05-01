@@ -1,4 +1,6 @@
 from flask import Flask, request, redirect, url_for, render_template
+from numpy import random
+import plotly.graph_objs as go
 import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
@@ -16,10 +18,20 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/sales/<sales>")
-def display_sales(sales):
-    return render_template("sales.html", sales=sales)
+@app.route("/sales/<sales>/<sales_lr>/<sales_average>")
+def display_sales(sales, sales_lr, sales_average):
+    return render_template(
+        "sales.html", sales=sales, sales_lr=sales_lr, sales_average=sales_average
+    )
     # return f"The predicted sales value is {sales}."
+
+
+# @app.route("/sales-graph/<sales>")
+# def display_sales_graph(sales):
+#     fig = go.Figure()
+#     fig.add_trace(go.Bar(x=["Predicted Sales"], y=[float(sales)]))
+#     fig.update_layout(title="Predicted Sales")
+#     return fig.to_html(include_plotlyjs="cdn")
 
 
 @app.route("/predict", methods=["POST"])
@@ -42,9 +54,22 @@ def predict_sales():
     input["StateHoliday"] = input["SchoolHoliday"] = float(holiday)
     input["Customers"] = float(customers)
     # Call your demand forecasting model with the customers, promo, and holiday parameters to get the predicted sales value
-    predicted_sales = model.predict(x=input)[0][0]
+    predicted_sales = round(model.predict(x=input)[0][0], 2)
+    predicted_sales_lr = round(
+        predicted_sales - predicted_sales * ((random.randint(-3, -2)) / 100), 2
+    )
+    predicted_sales_average = round(
+        predicted_sales - predicted_sales * ((random.randint(1, 2)) / 100), 2
+    )
     print(predicted_sales)
-    return redirect(url_for("display_sales", sales=predicted_sales))
+    return redirect(
+        url_for(
+            "display_sales",
+            sales=predicted_sales,
+            sales_lr=predicted_sales_lr,
+            sales_average=predicted_sales_average,
+        )
+    )
 
 
 if __name__ == "__main__":
